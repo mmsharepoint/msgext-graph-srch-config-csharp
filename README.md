@@ -5,6 +5,10 @@ A Microsoft Teams search-based messaging extension using SSO with Microsoft Grap
 
 This sample is a search-based messaging extension created using the Teams Toolkit with Visual Studio 2022. It authenticates against Microsoft Graph via SSO and receives documents to be posted as adaptive card to the message compose box of a channel or conversation. The essential thing is that it is configurable and persists it's configuration to an Azure App Configuration resource.
 
+Configuration Page
+
+![Configuration of a search-based Teams Message extension ...](assets/07ConfigPage.png)
+
 For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2023/)
 
 ## Applies to
