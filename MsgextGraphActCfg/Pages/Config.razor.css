@@ -1,6 +1,6 @@
-﻿.siteIDField {
+﻿.siteIDField ::deep fluent-text-field {
   width: 580px;
 }
-.listIDField {
+.listIDField ::deep fluent-text-field {
   width: 300px;
 }

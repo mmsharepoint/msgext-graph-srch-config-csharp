@@ -3,21 +3,19 @@
 
 <h3>Search Config in Azure App configuration</h3>
 <div>
-  <div>
+  <div class="siteIDField">
     <FluentTextField @bind-Value="@siteID" 
                       Appearance="Appearance.Filled" 
                       Placeholder="Enter a site id" 
                       Required="true" 
-                      id="txtSiteID" 
-                      class="siteIDField">Site ID</FluentTextField>
+                      id="txtSiteID">Site ID</FluentTextField>
   </div>
-  <div>
+  <div class="listIDField">
     <FluentTextField @bind-Value="@listID" 
                       Appearance="Appearance.Filled"
                       Placeholder="Enter a list id" 
                       Required="true" 
-                      id="txtListID" 
-                      @Class="listIDField">List ID</FluentTextField>
+                      id="txtListID">List ID</FluentTextField>
   </div>
 </div>
 <p />
