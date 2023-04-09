@@ -1,13 +1,23 @@
 ﻿@page "/config"
 @inject IConfiguration configuration;
 
-<h3>Action Config in Azure App configuration</h3>
+<h3>Search Config in Azure App configuration</h3>
 <div>
   <div>
-    <FluentTextField @bind-Value="@siteID" Placeholder="Enter a site id" Required="true" id="txtSiteID">Site ID</FluentTextField>
+    <FluentTextField @bind-Value="@siteID" 
+                      Appearance="Appearance.Filled" 
+                      Placeholder="Enter a site id" 
+                      Required="true" 
+                      id="txtSiteID" 
+                      class="siteIDField">Site ID</FluentTextField>
   </div>
   <div>
-    <FluentTextField @bind-Value="@listID" Placeholder="Enter a list id" Required="true" id="txtListID">List ID</FluentTextField>
+    <FluentTextField @bind-Value="@listID" 
+                      Appearance="Appearance.Filled"
+                      Placeholder="Enter a list id" 
+                      Required="true" 
+                      id="txtListID" 
+                      class="listIDField">List ID</FluentTextField>
   </div>
 </div>
 <p />
