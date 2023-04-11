@@ -125,7 +125,8 @@ public class TeamsMessageExtension : TeamsActivityHandler
 
             string sentinel = azureAccess.GetConfigurationValue("MsgExtGraphActCfg:Settings:Sentinel");
             long newSentinel = long.Parse(sentinel);
-            azureAccess.storeConfigValue("MsgExtGraphActCfg:Settings:Sentinel", newSentinel++.ToString());
+            newSentinel++;
+            azureAccess.storeConfigValue("MsgExtGraphActCfg:Settings:Sentinel", newSentinel.ToString());
         }
     }
 

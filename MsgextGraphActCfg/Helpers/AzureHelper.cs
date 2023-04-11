@@ -1,4 +1,5 @@
 ﻿using Azure.Data.AppConfiguration;
+using Azure.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MsgextGraphSrchCfg.Models;
@@ -11,7 +12,14 @@ namespace MsgextGraphSrchCfg.Helpers
         public AzureHelper(IConfiguration config) 
         {
             string _connectionString = config["AZURE_CONFIG_CONNECTION_STRING"];
-            _client = new ConfigurationClient(_connectionString);
+            if (_connectionString.StartsWith("Endpoint"))
+            {
+                _client = new ConfigurationClient(_connectionString);
+            }
+            else
+            {
+                _client = new ConfigurationClient(new Uri(_connectionString), new ManagedIdentityCredential());
+            }
         }
 
         public void storeConfigValue(string key, string value)

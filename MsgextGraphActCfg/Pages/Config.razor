@@ -1,7 +1,6 @@
 ﻿@page "/config"
 @inject IConfiguration configuration;
 <h3>Search Config in Azure App configuration</h3>
-<h4>@configuration["MsgExtGraphActCfg:Settings:Subheader"]</h4>
 <div>
   <div class="siteIDField">
     <FluentTextField @bind-Value="@siteID" 
