@@ -18,5 +18,14 @@ namespace MsgextGraphSrchCfg.Helpers
         {
             _client.SetConfigurationSetting(key, value);
         }
+        public string GetConfigurationValue(string key)
+        {
+            var configValue = _client.GetConfigurationSetting(key);
+            if (configValue != null)
+            {
+                return configValue.Value.Value;
+            }
+            else { return ""; }
+        }
     }
 }

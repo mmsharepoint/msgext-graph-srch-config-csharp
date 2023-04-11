@@ -32,6 +32,8 @@ builder.Configuration.AddAzureAppConfiguration(options =>
 });
 builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
+// Add Azure App Configuration middleware to the container of services.
+builder.Services.AddAzureAppConfiguration();
 // Add AzureAppConfigurationSettings
 builder.Services.Configure<MsgextGraphSrchCfg.Models.Settings>(builder.Configuration.GetSection("MsgExtGraphActCfg:Settings"));
 // Create the Bot Framework Adapter with error handling enabled.

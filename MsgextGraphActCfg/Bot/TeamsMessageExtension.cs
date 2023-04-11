@@ -122,6 +122,10 @@ public class TeamsMessageExtension : TeamsActivityHandler
             AzureHelper azureAccess = new AzureHelper(_configuration);
             azureAccess.storeConfigValue("MsgExtGraphActCfg:Settings:SiteID", siteID);
             azureAccess.storeConfigValue("MsgExtGraphActCfg:Settings:ListID", listID);
+
+            string sentinel = azureAccess.GetConfigurationValue("MsgExtGraphActCfg:Settings:Sentinel");
+            long newSentinel = long.Parse(sentinel);
+            azureAccess.storeConfigValue("MsgExtGraphActCfg:Settings:Sentinel", newSentinel++.ToString());
         }
     }
 
