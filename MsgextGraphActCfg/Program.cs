@@ -4,6 +4,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,15 +22,30 @@ builder.Configuration["MicrosoftAppPassword"] = builder.Configuration.GetSection
 string connectionString = builder.Configuration.GetSection("AZURE_CONFIG_CONNECTION_STRING")?.Value;
 
 // Load configuration from Azure App Configuration
-builder.Configuration.AddAzureAppConfiguration(options =>
+
+if (connectionString.StartsWith("Endpoint")) {
+    builder.Configuration.AddAzureAppConfiguration(options =>
+    {
+        options.Connect(connectionString)
+               // Load all keys that start with `TestApp:` and have no label
+               .Select("MsgExtGraphActCfg:Settings:*", LabelFilter.Null)
+               // Configure to reload configuration if the registered sentinel key is modified
+               .ConfigureRefresh(refreshOptions =>
+                    refreshOptions.Register("MsgExtGraphActCfg:Settings:Sentinel", refreshAll: true));
+    });
+}
+else
 {
-    options.Connect(connectionString)
-           // Load all keys that start with `TestApp:` and have no label
-           .Select("MsgExtGraphActCfg:Settings:*", LabelFilter.Null)
-           // Configure to reload configuration if the registered sentinel key is modified
-           .ConfigureRefresh(refreshOptions =>
-                refreshOptions.Register("MsgExtGraphActCfg:Settings:Sentinel", refreshAll: true));
-});
+    builder.Configuration.AddAzureAppConfiguration(options =>
+    {
+        options.Connect(new Uri(connectionString), new ManagedIdentityCredential())
+               // Load all keys that start with `TestApp:` and have no label
+               .Select("MsgExtGraphActCfg:Settings:*", LabelFilter.Null)
+               // Configure to reload configuration if the registered sentinel key is modified
+               .ConfigureRefresh(refreshOptions =>
+                    refreshOptions.Register("MsgExtGraphActCfg:Settings:Sentinel", refreshAll: true));
+    });
+}
 builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
 // Add Azure App Configuration middleware to the container of services.
