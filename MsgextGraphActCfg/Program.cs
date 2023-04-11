@@ -3,6 +3,7 @@ using MsgextGraphSrchCfg.Bot;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,15 @@ builder.Configuration["MicrosoftAppPassword"] = builder.Configuration.GetSection
 string connectionString = builder.Configuration.GetSection("AZURE_CONFIG_CONNECTION_STRING")?.Value;
 
 // Load configuration from Azure App Configuration
-builder.Configuration.AddAzureAppConfiguration(connectionString);
+builder.Configuration.AddAzureAppConfiguration(options =>
+{
+    options.Connect(connectionString)
+           // Load all keys that start with `TestApp:` and have no label
+           .Select("MsgExtGraphActCfg:Settings:*", LabelFilter.Null)
+           // Configure to reload configuration if the registered sentinel key is modified
+           .ConfigureRefresh(refreshOptions =>
+                refreshOptions.Register("MsgExtGraphActCfg:Settings:Sentinel", refreshAll: true));
+});
 builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
 // Add AzureAppConfigurationSettings
@@ -43,6 +52,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Use Azure App Configuration middleware for dynamic configuration refresh.
+app.UseAzureAppConfiguration();
 
 app.UseEndpoints(endpoints =>
 {

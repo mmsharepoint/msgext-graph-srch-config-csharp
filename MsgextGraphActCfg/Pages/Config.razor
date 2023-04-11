@@ -1,7 +1,7 @@
 ﻿@page "/config"
 @inject IConfiguration configuration;
-
 <h3>Search Config in Azure App configuration</h3>
+<h4>@configuration["MsgExtGraphActCfg:Settings:Subheader"]</h4>
 <div>
   <div class="siteIDField">
     <FluentTextField @bind-Value="@siteID" 
@@ -19,13 +19,10 @@
   </div>
 </div>
 <p />
-
 <FluentButton onclick="MsgExtCfg.Config.saveConfig()" Appearance="Appearance.Accent">Save</FluentButton>
-
 @code {
     string siteID;
     string listID;
-
     protected override Task OnInitializedAsync()
     {
         siteID = configuration["MsgExtGraphActCfg:Settings:SiteID"];
