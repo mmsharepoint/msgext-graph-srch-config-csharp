@@ -9,6 +9,10 @@ Configuration Page
 
 ![Configuration of a search-based Teams Message extension ...](assets/07ConfigPage.png)
 
+Message Extension
+
+![Message extension in action...](assets/14MsgextInAction.gif)
+
 For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2023/)
 
 ## Applies to
@@ -19,7 +23,7 @@ This sample was created [using the Teams Toolkit with Visual Studio 2022](https:
 
 Version|Date|Author|Comments
 -------|----|--------|--------
-1.0|April xx, 2023|[Markus Moeller](http://www.twitter.com/moeller2_0)|Initial release
+1.0|April 12, 2023|[Markus Moeller](http://www.twitter.com/moeller2_0)|Initial release
 
 ## Disclaimer
 

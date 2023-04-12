@@ -22,7 +22,7 @@ builder.Configuration["MicrosoftAppPassword"] = builder.Configuration.GetSection
 string connectionString = builder.Configuration.GetSection("AZURE_CONFIG_CONNECTION_STRING")?.Value;
 
 // Load configuration from Azure App Configuration
-
+// Either with secret Endpoint or Managed Identity (and simple https:// endpoint ...)
 if (connectionString.StartsWith("Endpoint")) {
     builder.Configuration.AddAzureAppConfiguration(options =>
     {
