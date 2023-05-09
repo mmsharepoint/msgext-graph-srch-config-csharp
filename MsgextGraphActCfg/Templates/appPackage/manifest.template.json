@@ -63,7 +63,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{state.fx-resource-bot.domain}}"
+    "{{state.fx-resource-bot.domain}}",
+    "*.botframework.com"
   ],
   "webApplicationInfo": {
     "id": "{{state.fx-resource-bot.botId}}",
